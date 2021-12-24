@@ -1,0 +1,71 @@
+import styles from '../styles/Home.module.css'
+import useSWR from 'swr'
+import { Task } from '../types/task'
+import { HStack, VStack } from '@chakra-ui/react'
+import { Guid } from "guid-typescript";
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { useState } from 'react';
+
+
+function useTasks(){
+
+}
+
+const setTaskCheck = (id:string) =>{
+    for(var item in localStorage){  
+        const task:Task = JSON.parse(localStorage.getItem(item)!)
+        if(task?.id === id){
+            if(task?.isDone === false){
+                task.isDone = true;
+                localStorage.setItem(id,JSON.stringify(task))
+                return true
+            }else{
+                task.isDone = false
+                localStorage.setItem(id,JSON.stringify(task))
+                return false
+            }
+        }
+    }
+}
+
+
+const fetcher = () =>{
+    var arr:Task[] = []
+    for(var item in localStorage){
+        const task:Task = JSON.parse(localStorage.getItem(item)!)
+        if(!item.includes("cache") && task !== null){
+            arr.push(task)
+        }
+    }
+    console.log(arr)
+    return arr
+}
+
+
+const Tasks = ()=>{
+    const{data,error} = useSWR('/tasks',fetcher)
+    const[state, setState] = useState(data)
+    
+
+
+    if (error) return <div className={styles.title}>failed to load</div>
+    if (!data) return <div className={styles.title}>loading...</div>
+
+    return(
+        <div>
+            <VStack>\
+                <Checkbox defaultChecked>asd</Checkbox>
+            {data?.map(task =>(
+                <HStack key={Guid.create().toString()}>
+                    <Checkbox isChecked={setTaskCheck(task?.id)} onChange={(e)=>{
+                        setTaskCheck(task?.id)
+                        }}>
+                    <p>{task?.title}</p>
+                    </Checkbox>
+                </HStack>
+            ))}
+            </VStack>
+        </div>
+    )
+}
+export default Tasks
