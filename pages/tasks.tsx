@@ -1,13 +1,10 @@
-import styles from '../styles/Home.module.css'
 import useSWR from 'swr'
 import { Task } from '../types/task'
 import { HStack, VStack } from '@chakra-ui/react'
-import { Guid } from "guid-typescript";
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Checkbox} from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
-import useTasks from '../hooks/hooks';
 
-const fetcher = () =>{
+function fetcher(){
     var tasks:Task[] = []
     for(var item in localStorage){
         const task:Task = JSON.parse(localStorage.getItem(item)!)
@@ -15,24 +12,37 @@ const fetcher = () =>{
             tasks.push(task)
         }
     }
-    console.log(tasks)
     return tasks
+    
 }
 
-
 const Tasks = ()=>{
-    const{data} = useSWR('/tasks',fetcher)
-    const[tasks,setTasks] = useTasks(data!);
+    const{data,error} = useSWR('/tasks',fetcher)
+    const [state,setState] = useState(data)
+    useEffect(() => { setState(data); }, [data])
 
+    const handleChange = (id:string)=>{
+        let task = data!.find(task => task.id === id)
+        if(task!.isDone === true){
+            task!.isDone = false
+            localStorage.setItem(task!.id.toString(),JSON.stringify(task))
+        }else{
+            task!.isDone = true   
+            localStorage.setItem(task!.id.toString(),JSON.stringify(task))  
+        }
+        console.log(task)
+    }
     return(
         <div>
-            {data?.map(task =>(
-                <HStack key={Guid.create().toString()}>
-                    <Checkbox isChecked={task?.isDone}>
-                    <p>{task?.title}</p>
+            <VStack>
+            {state?.map(task =>(
+                    <Checkbox key={task.id} size='lg' colorScheme='green' 
+                    isChecked={task.isDone}
+                    onChange={() => handleChange(task.id)}>
+                    <p>{task.title}</p>
                     </Checkbox>
-                </HStack>
             ))}
+            </VStack>
         </div>
     )
 }
