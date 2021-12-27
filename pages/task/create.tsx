@@ -1,30 +1,27 @@
 import { useState } from "react";
-import { Task } from "../../types/task"
-import { Guid } from "guid-typescript";
+import useTasks from "../../hooks/useTasks";
 
-const Create = ()=>{
-    const [state, setState] = useState("");
-    
-    const handleClick = ()=>{
-        const newTask: Task = {
-            id: Guid.create().toString(),
-            title: state.toString(),
-            isDone: false
-        }
-        setState("")
-        localStorage.setItem(newTask.id.toString(),JSON.stringify(newTask))
-    }
+const Create = () => {
+  const { addTask } = useTasks();
+  const [state, setState] = useState("");
 
-    const handleChange=(event:any)=>{
-        setState(event.target.value)
-    }
+  const handleClick = async () => {
+    const task = await addTask(state.toString());
+    setState("");
 
-    return(
-        <div>        
-        Title <input value={state} onChange={handleChange}/>
-        <button onClick={handleClick}>Add Task</button>
-        </div>
+    console.log(`created: ${task.title}`);
+    // @todo: show a popup notification
+  };
 
-    )
-}
-export default Create
+  const handleChange = (event: any) => {
+    setState(event.target.value);
+  };
+
+  return (
+    <div>
+      Title <input value={state} onChange={handleChange} />
+      <button onClick={handleClick}>Add Task</button>
+    </div>
+  );
+};
+export default Create;
