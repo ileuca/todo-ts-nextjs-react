@@ -7,10 +7,6 @@ import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import { useState } from 'react';
 
 
-function useTasks(){
-
-}
-
 const setTaskCheck = (id:string) =>{
     for(var item in localStorage){  
         const task:Task = JSON.parse(localStorage.getItem(item)!)
