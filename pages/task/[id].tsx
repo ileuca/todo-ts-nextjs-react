@@ -7,28 +7,16 @@ import { Task } from "../../types/task";
 const SingleTask = ()=>{
     const router = useRouter();
     const {tasks, updateTask} = useTasks();
-    const task = tasks?.find(task=>{return task.id === router.query.id});
-    console.log("task",task)
-    
-    const [taskTitle, setTaskTitle] = useState(task?.title);
+    const initialtask = tasks?.find(task=>{return task.id === router.query.id});
 
-    const handleChange = (event:any) =>{
-        setTaskTitle(event.target.value)
-    }
 
-    const handleClick = () =>{
-        const updatedTask: Task ={
-            id: task?.id,
-            title: taskTitle,
-            isDone: task?.isDone
-        }
-        updateTask(task?.id,updatedTask)
-        window.location.href = "/tasks"
-    }
     return(
         <>
-        <Input value={taskTitle} onChange={handleChange} placeholder='Title' />
-        <Button onClick={handleClick} colorScheme='blue'>Update Task</Button>
+        <p>{initialtask?.id}</p>
+        <p>{initialtask?.title}</p>
+
+        <Input value={initialtask?.title || ""} onChange={()=>{}} placeholder='Title' />
+        <Button onClick={()=>{}} colorScheme='blue'>Update Task</Button>
         </>
     )}
 
