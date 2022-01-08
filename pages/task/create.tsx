@@ -16,7 +16,7 @@ const CreateTask =()=> {
     }
     return(
         <div>
-            Title : <Input value={taskTitle} onChange={handleChange}placeholder='Basic usage' />
+            Title : <Input value={taskTitle} onChange={handleChange} placeholder='Title' />
             <Button onClick={handleClick} colorScheme='blue'>Add Task</Button>
         </div>
     )

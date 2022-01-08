@@ -27,7 +27,7 @@ const SingleTask = ()=>{
     }
     return(
         <>
-        <Input value={taskTitle} onChange={handleChange}placeholder='Basic usage' />
+        <Input value={taskTitle} onChange={handleChange} placeholder='Title' />
         <Button onClick={handleClick} colorScheme='blue'>Update Task</Button>
         </>
     )}
