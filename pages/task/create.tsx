@@ -1,27 +1,25 @@
+import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import useTasks from "../../hooks/useTasks";
 
-const Create = () => {
-  const { addTask } = useTasks();
-  const [state, setState] = useState("");
 
-  const handleClick = async () => {
-    const task = await addTask(state.toString());
-    setState("");
+const CreateTask =()=> {
+    const {addTask} = useTasks();
+    const [taskTitle, setTaskTitle] = useState("");
+    const handleChange = (event:any) =>{
+        setTaskTitle(event.target.value)
+    }
+    const handleClick = ()=>{
+        const task = addTask(taskTitle.toString());
+        setTaskTitle("")
+        window.location.href="/tasks"
+    }
+    return(
+        <div>
+            Title : <Input value={taskTitle} onChange={handleChange}placeholder='Basic usage' />
+            <Button onClick={handleClick} colorScheme='blue'>Add Task</Button>
+        </div>
+    )
+}
 
-    console.log(`created: ${task.title}`);
-    // @todo: show a popup notification
-  };
-
-  const handleChange = (event: any) => {
-    setState(event.target.value);
-  };
-
-  return (
-    <div>
-      Title <input value={state} onChange={handleChange} />
-      <button onClick={handleClick}>Add Task</button>
-    </div>
-  );
-};
-export default Create;
+export default CreateTask;
