@@ -13,7 +13,7 @@ const EditModal = ({id}:{id:string | undefined}) =>{
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
             <ModalContent>
-              <ModalHeader>Create New Task</ModalHeader>
+              <ModalHeader>Edit Task</ModalHeader>
               <ModalCloseButton />
   
               <ModalBody>
