@@ -1,6 +1,5 @@
-import {Box, Button, Checkbox, Container, HStack,VStack} from "@chakra-ui/react";
+import { Box, Button, Checkbox, Container, HStack,VStack } from "@chakra-ui/react";
 import useTasks from "../hooks/useTasks";
-import {Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton} from '@chakra-ui/react'
 const Tasks = ()=>{
 const {tasks, changeTasksStatus,setTasks} = useTasks();
 const handleChange = (id:string | undefined) =>{
