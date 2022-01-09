@@ -28,7 +28,7 @@ return(
             <HStack key={task.id}>
                     <HStack >
                     <Checkbox size='lg' colorScheme={handleColor(task.isDone)} isChecked={task.isDone} onChange={()=> handleChange(task.id)}>
-                        <Button style={{maxWidth:"230px", overflow:"hidden", display:"block", whiteSpace:"break-spaces", textOverflow:"ellipsis", textAlign:"left"}} 
+                        <Button style={{maxWidth:"130px", overflow:"scroll", display:"block", whiteSpace:"break-spaces", textOverflow:"ellipsis", textAlign:"center"}} 
                         colorScheme={handleColor(task.isDone)} onClick={()=>{handleChange(task.id)}}>
                             {task.title}
                             </Button>
