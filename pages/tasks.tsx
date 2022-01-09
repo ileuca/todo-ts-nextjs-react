@@ -26,23 +26,17 @@ return(
     <CreateModal/>
         {tasks?.map((task)=>(
             <HStack key={task.id}>
-                <Container maxW='xl' centerContent>
-                    <Box padding='2'  maxW='3xl'>
-                    <HStack>
+                    <HStack position="-webkit-sticky">
                     <Checkbox size='lg' colorScheme={handleColor(task.isDone)} isChecked={task.isDone} onChange={()=> handleChange(task.id)}>
-                        <Button colorScheme={handleColor(task.isDone)} onClick={()=>{handleChange(task.id)}}>{task.title}</Button>
+                        <Button style={{overflow:"-moz-hidden-unscrollable", whiteSpace: "normal",wordWrap: "break-word"}} 
+                        height={[`${task?.title!.length > 30 ? "60px" : "40px"}`, "40px"]} 
+                        colorScheme={handleColor(task.isDone)} onClick={()=>{handleChange(task.id)}}>
+                            {task.title}
+                            </Button>
                     </Checkbox>
-                    </HStack>
-                    </Box>
-                </Container>
-                <Container maxW='xl' centerContent>
-                    <Box padding='2'  maxW='3xl'>
-                    <HStack>
                     <EditModal id={task.id}/>
                     <Button colorScheme='red' onClick={()=>{handleDeleteClick(task.id)}}>Delete</Button>
                     </HStack>
-                    </Box>
-                </Container>
             </HStack>  
         ))}
     </VStack>
