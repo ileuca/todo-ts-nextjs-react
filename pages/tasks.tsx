@@ -26,10 +26,9 @@ return(
     <CreateModal/>
         {tasks?.map((task)=>(
             <HStack key={task.id}>
-                    <HStack position="-webkit-sticky">
+                    <HStack >
                     <Checkbox size='lg' colorScheme={handleColor(task.isDone)} isChecked={task.isDone} onChange={()=> handleChange(task.id)}>
-                        <Button style={{overflow:"-moz-hidden-unscrollable", whiteSpace: "normal",wordWrap: "break-word"}} 
-                        height={[`${task?.title!.length > 30 ? "60px" : "40px"}`, "40px"]} 
+                        <Button style={{maxWidth:"230px", overflow:"hidden", display:"block", whiteSpace:"break-spaces", textOverflow:"ellipsis", textAlign:"left"}} 
                         colorScheme={handleColor(task.isDone)} onClick={()=>{handleChange(task.id)}}>
                             {task.title}
                             </Button>
