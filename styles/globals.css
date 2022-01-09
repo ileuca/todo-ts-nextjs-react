@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.background {
+  background: rgb(193,137,105);
+  background: -moz-linear-gradient(90deg, rgba(193,137,105,1) 0%, rgba(142,136,56,1) 38%, rgba(23,89,102,1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(193,137,105,1) 0%, rgba(142,136,56,1) 38%, rgba(23,89,102,1) 100%);
+  background: linear-gradient(90deg, rgba(193,137,105,1) 0%, rgba(142,136,56,1) 38%, rgba(23,89,102,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c18969",endColorstr="#175966",GradientType=1);
+}

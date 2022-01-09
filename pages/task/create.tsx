@@ -12,12 +12,12 @@ const CreateTask =()=> {
     const handleClick = ()=>{
         const task = addTask(taskTitle.toString());
         setTaskTitle("")
-        window.location.href="/tasks"
     }
     return(
         <div>
-            Title : <Input value={taskTitle} onChange={handleChange} placeholder='Title' />
-            <Button onClick={handleClick} colorScheme='blue'>Add Task</Button>
+            <Input value={taskTitle} onChange={handleChange} placeholder='Title' />
+            
+            <Button onClick={handleClick} colorScheme='green'>Add Task</Button>
         </div>
     )
 }

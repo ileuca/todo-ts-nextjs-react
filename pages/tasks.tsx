@@ -1,17 +1,13 @@
 import { Box, Button, Checkbox, Container, HStack,VStack } from "@chakra-ui/react";
+import CreateModal from "../components/createModal";
+import EditModal from "../components/editModal";
 import useTasks from "../hooks/useTasks";
 const Tasks = ()=>{
 const {tasks, changeTasksStatus,setTasks} = useTasks();
 const handleChange = (id:string | undefined) =>{
     changeTasksStatus(id)
 }
-const handleCreateClick = ()=>{
-    window.location.href = "/task/create"
-}
 
-const handleEditClick = (id:string | undefined)=>{
-    window.location.href = "/task/" + id
-}
 const handleDeleteClick =(id:string | undefined)=>{
     const modifiedTasks = tasks?.filter(task => task.id !== id)
     setTasks(modifiedTasks)
@@ -27,14 +23,14 @@ const handleColor = (isDone:boolean | undefined) =>{
 return(
 
     <VStack>
-    <Button colorScheme="purple" onClick={handleCreateClick}>Create</Button>
+    <CreateModal/>
         {tasks?.map((task)=>(
             <HStack key={task.id}>
                 <Container maxW='xl' centerContent>
                     <Box padding='2'  maxW='3xl'>
                     <HStack>
                     <Checkbox size='lg' colorScheme={handleColor(task.isDone)} isChecked={task.isDone} onChange={()=> handleChange(task.id)}>
-                        <Button colorScheme={handleColor(task.isDone)}>{task.title}</Button>
+                        <Button colorScheme={handleColor(task.isDone)} onClick={()=>{handleChange(task.id)}}>{task.title}</Button>
                     </Checkbox>
                     </HStack>
                     </Box>
@@ -42,7 +38,7 @@ return(
                 <Container maxW='xl' centerContent>
                     <Box padding='2'  maxW='3xl'>
                     <HStack>
-                    <Button colorScheme='blue' onClick={()=>{handleEditClick(task.id)}}>Edit</Button>
+                    <EditModal id={task.id}/>
                     <Button colorScheme='red' onClick={()=>{handleDeleteClick(task.id)}}>Delete</Button>
                     </HStack>
                     </Box>

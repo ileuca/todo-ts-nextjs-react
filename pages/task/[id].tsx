@@ -3,10 +3,10 @@ import { useRouter } from "next/router"
 import useTasks from "../../hooks/useTasks";
 import { Task } from "../../types/task";
 
-const SingleTask = ()=>{
+const SingleTask = ({id}:{id:string | undefined})=>{
     const router = useRouter();
     const {tasks, updateTask} = useTasks();
-    const initialtask = tasks?.find(task=>{return task.id === router.query.id});
+    const initialtask = tasks?.find(task=>{return task.id === id});
 
     const handleChange = (event:any) =>{
         const updatedTask:Task ={
@@ -17,14 +17,9 @@ const SingleTask = ()=>{
         updateTask(updatedTask.id,updatedTask)
     }
 
-    const handleClick =()=>{
-        window.location.href="/"
-    }
-
     return(
         <>
         <Input value={initialtask?.title || ""} onChange={handleChange} placeholder='Title' />
-        <Button onClick={handleClick} colorScheme='blue'>Close</Button>
         </>
     )}
 
