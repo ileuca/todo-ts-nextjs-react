@@ -23,9 +23,6 @@ const SingleTask = ()=>{
 
     return(
         <>
-        <p>{initialtask?.id}</p>
-        <p>{initialtask?.title}</p>
-
         <Input value={initialtask?.title || ""} onChange={handleChange} placeholder='Title' />
         <Button onClick={handleClick} colorScheme='blue'>Close</Button>
         </>
