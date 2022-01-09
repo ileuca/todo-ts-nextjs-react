@@ -17,11 +17,15 @@ const CreateTask =()=> {
         setTaskTitle("");
         inputRef.setFocus();
     }
+    const handleBack = ()=>{
+        window.location.href = "/"
+    }
     return(
         <div>
             <Input ref={inputRef.ref} value={taskTitle} onChange={handleChange} placeholder='Title' />
             
             <Button onClick={handleClick} colorScheme='green'>Add Task</Button>
+            <Button onClick={handleBack} colorScheme='blue'>Back</Button>
         </div>
     )
 }

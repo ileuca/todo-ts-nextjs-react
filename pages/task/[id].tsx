@@ -4,9 +4,14 @@ import useTasks from "../../hooks/useTasks";
 import { Task } from "../../types/task";
 
 const SingleTask = ({id}:{id:string | undefined})=>{
+    var initialtask:Task | undefined;
     const router = useRouter();
     const {tasks, updateTask} = useTasks();
-    const initialtask = tasks?.find(task=>{return task.id === id});
+    if(id){
+    initialtask = tasks?.find(task=>{return task.id === id});
+    }else{
+    initialtask = tasks?.find(task=>{return task.id === router.query.id}); 
+    }
 
     const handleChange = (event:any) =>{
         const updatedTask:Task ={
@@ -16,10 +21,13 @@ const SingleTask = ({id}:{id:string | undefined})=>{
         }
         updateTask(updatedTask.id,updatedTask)
     }
-
+    const handleBack = ()=>{
+        window.location.href = "/"
+    }
     return(
         <>
         <Input value={initialtask?.title || ""} onChange={handleChange} placeholder='Title' />
+        <Button onClick={handleBack} colorScheme='blue'>Back</Button>
         </>
     )}
 
