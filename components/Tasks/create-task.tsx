@@ -1,4 +1,4 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Box, Button, HStack, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import useFocus from "../../hooks/useFocus";
 import useTasks from "../../hooks/useTasks";
@@ -16,25 +16,22 @@ const CreateTask = () => {
     setTaskTitle("");
     inputRef.setFocus();
   };
-  const handleBack = () => {
-    window.location.href = "/";
-  };
-  return (
-    <div>
-      <Input
-        ref={inputRef.ref}
-        value={taskTitle}
-        onChange={handleChange}
-        placeholder="Title"
-      />
 
-      <Button onClick={handleClick} colorScheme="green">
-        Add Task
-      </Button>
-      <Button onClick={handleBack} colorScheme="blue">
-        Back
-      </Button>
-    </div>
+  return (
+    <Box>
+      <HStack>
+        <Input
+          ref={inputRef.ref}
+          value={taskTitle}
+          onChange={handleChange}
+          placeholder="Title"
+        />
+
+        <Button onClick={handleClick} colorScheme="green">
+          Add Task
+        </Button>
+      </HStack>
+    </Box>
   );
 };
 

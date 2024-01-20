@@ -1,20 +1,26 @@
+// pages/_app.tsx
 import "@/styles/globals.css";
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bgImage: "url('/todobackground.jpg')",
+        bgPosition: "center",
+        bgRepeat: "no-repeat",
+        bgSize: "cover",
+      },
+    },
+  },
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Box
-      style={{ minHeight: "100vh", height: "100%" }}
-      backgroundImage={"url(/todobackground.jpg)"}
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-    >
-      <ChakraProvider>
-        <Component {...pageProps} />;
-      </ChakraProvider>
-    </Box>
+    <ChakraProvider theme={theme}>
+      <Component {...pageProps} />
+    </ChakraProvider>
   );
 };
 

@@ -29,8 +29,8 @@ const CreateModal = () => {
               <CreateTask />
             </ModalBody>
 
-            <ModalFooter>
-              <Button colorScheme="red" mr={3} onClick={onClose}>
+            <ModalFooter justifyContent="flex-start">
+              <Button colorScheme="red" onClick={onClose}>
                 Close
               </Button>
             </ModalFooter>
