@@ -1,16 +1,27 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { Box, ChakraProvider } from '@chakra-ui/react'
-import bg from '/public/todobackground.jpg'
+// pages/_app.tsx
+import "@/styles/globals.css";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return(
-    <Box style = {{minHeight:"100vh",height:"100%"}} backgroundImage={bg.src} backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize='cover'>
-    <ChakraProvider>
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bgImage: "url('/todobackground.jpg')",
+        bgPosition: "center",
+        bgRepeat: "no-repeat",
+        bgSize: "cover",
+      },
+    },
+  },
+});
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
-    </Box>
-  )
-}
+  );
+};
 
-export default MyApp
+export default App;

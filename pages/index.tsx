@@ -1,14 +1,10 @@
-import { Box } from '@chakra-ui/react'
-import type { NextPage } from 'next'
-import Tasks from './tasks'
+import Layout from "@/components/Layout";
+import Tasks from "@/components/Tasks";
 
-
-const Home: NextPage = () => {
+export default function Home() {
   return (
-
-      <Tasks/>
-
-  )
+    <Layout>
+      <Tasks />
+    </Layout>
+  );
 }
-
-export default Home
